@@ -9,5 +9,5 @@ class ShoppingCartViewSet(ModelViewSet):
 
 
 class CartItemViewSet(ModelViewSet):
-    queryset = CartItem
+    queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer

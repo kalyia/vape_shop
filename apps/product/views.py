@@ -10,7 +10,7 @@ import django_filters.rest_framework as filters
 
 
 from .paginations import ProductPagination
-from .models import Product, ProductImage, Review, LikeProduct, Favorite
+from .models import Product, Review, LikeProduct, Favorite
 from .serializers import *
 
 
@@ -64,16 +64,6 @@ class ProductViewSet(ModelViewSet):
             fav.favorite = not fav.favorite
             fav.save()
             return Response('Not in Favs')
-
-
-class ProductImageView(ModelViewSet):
-    queryset = ProductImage.objects.all()
-    serializer_class = ProductImageSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, ]
-
-    def get_serializer_context(self):
-        return {'return': self.request}
-
 
 class ReviewProductView(ModelViewSet):
     queryset = Review.objects.all()
