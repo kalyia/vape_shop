@@ -3,11 +3,15 @@ from .models import Product, Review, LikeProduct, SimilarProduct
 
 
 class ProductSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     author = serializers.HiddenField(default=serializers.CurrentUserDefault())
+=======
+>>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
     created_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M:%S', read_only=True)
 
     class Meta:
         model = Product
+<<<<<<< HEAD
         exclude = ('create_date', 'update_date')
 
     def to_representation(self, instance):
@@ -16,18 +20,28 @@ class ProductSerializer(serializers.ModelSerializer):
         representation['author'] = instance.author.email
         representation['images'] = ProductImageSerializer(instance.images.all(),
                                                   many=True, context=self.context).data
+=======
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['image'] = instance.image_url
+>>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
         representation['reviews'] = ReviewProductSerializer(instance.reviews.all(),
                                                   many=True, context=self.context).data
 
         representation['likes'] = instance.likes.filter(is_like=True).count()
         return representation
 
+<<<<<<< HEAD
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['image'] = self._get_image_url(instance)
         representation['product'] = instance.product.title
         return representation
 
+=======
+>>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
 
 class ReviewProductSerializer(serializers.ModelSerializer):
     class Meta:

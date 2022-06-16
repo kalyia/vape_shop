@@ -1,5 +1,8 @@
+from unicodedata import category
+from django.conf import settings
 from django.db import models
 
+<<<<<<< HEAD
 # Create your models here.
 from apps.category.models import Category
 
@@ -13,10 +16,36 @@ class Product(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
+=======
+
+class Product(models.Model):
+    TYPES = (
+        ("vape", "Vapes"),
+        ("pod", "Pods"),
+        ("cigarettes", "Cigarettes"),
+        ("hookah", "Hookah"),
+        ("self-rolling", "Hand Rolling Tobacco"),
+        ("goo", "E-liquid "),
+    )
+    title = models.CharField(max_length=100)
+    category= models.CharField(choices=TYPES, max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
+>>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
 
     def __str__(self):
         return self.title
 
+<<<<<<< HEAD
+=======
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ''
+
+>>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
 
 class Review(models.Model):
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
@@ -28,7 +57,11 @@ class Review(models.Model):
     class Meta:
         ordering = ('-created_at', )
 
+<<<<<<< HEAD
     def __str__(self) -> str:
+=======
+    def __str__(self):
+>>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
         return f"{self.author.email}"
 
 
