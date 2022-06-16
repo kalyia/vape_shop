@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-from django.shortcuts import render
-=======
-=======
->>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
 from rest_framework import generics
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
@@ -23,13 +17,8 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = (filters.DjangoFilterBackend, OrderingFilter, SearchFilter)
-<<<<<<< HEAD
-    ordering_fields = ['create_date', 'title', 'price']
-    permission_classes = [IsAuthenticated, ]
-=======
     ordering_fields = ['category', 'title', 'price']
     permission_classes = [IsAuthenticatedOrReadOnly ]
->>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
     pagination_class = ProductPagination
     search_fields = ['title', 'description']
 
@@ -69,20 +58,11 @@ class ProductViewSet(ModelViewSet):
         if fav.favorite == False:
             fav.favorite = not fav.favorite
             fav.save()
-<<<<<<< HEAD
-            return Response('Added to Favs')
-        else:
-            fav.favorite = not fav.favorite
-            fav.save()
-            return Response('Not in Favs')
-
-=======
             return Response('Added to Favorites')
         else:
             fav.favorite = not fav.favorite
             fav.save()
             return Response('Not in Favorites')
->>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
 
 class ReviewProductView(ModelViewSet):
     queryset = Review.objects.all()
@@ -104,10 +84,4 @@ class FavoriteView(ListAPIView):
         queryset = super().get_queryset()
         queryset = queryset.filter(favorites__user=self.request.user, favorites__favorite=True)
         return queryset
-
-
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 8cc98360e8b6fdda577860bc12b99e3becaffd10
 
