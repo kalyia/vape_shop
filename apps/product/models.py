@@ -1,8 +1,6 @@
 from django.db import models
 
-<<<<<<< Updated upstream
 # Create your models here.
-=======
 from apps.category.models import Category
 
 
@@ -51,4 +49,3 @@ class Favorite(models.Model):
     favorite = models.BooleanField(default=False) 
 
         
->>>>>>> Stashed changes
