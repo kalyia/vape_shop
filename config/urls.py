@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
+
 from apps.account.views import *
 from apps.order.views import OrderViewSet
 from apps.cart.views import ShoppingCartViewSet, CartItemViewSet
