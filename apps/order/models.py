@@ -4,9 +4,8 @@ from apps.cart.models import ShoppingCart
 
 class Order(models.Model):
     PAY_CHOICES = (
-        ("cash", "Наличными"),
-        ("card", "Оплата картой"),
-        ("debt", "В долг")
+        ("cash", "Cash payment"),
+        ("card", "Payment by card"),
     )
     shopping_cart = models.ForeignKey(
         to=ShoppingCart, on_delete=models.PROTECT, related_name='order'

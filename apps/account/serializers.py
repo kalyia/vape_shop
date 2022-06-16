@@ -15,14 +15,14 @@ class RegistrationSerializer(serializers.Serializer):
 
     def validate_email(self, email):
         if User.objects.filter(email=email).exists():  # проверили имейл на соответствие базе данных перед сохранением
-            raise serializers.ValidationError('email already exists')
+            raise serializers.ValidationError('Email already exists')
         return email
 
     def validate(self, attrs: dict):
         pass1 = attrs.get('password')
         pass2 = attrs.pop('password_confirm')  # удаляем поле чтобы оно не пошло в базу данных т.к. оно нам там не нужно
         if pass1 != pass2:
-            raise serializers.ValidationError("passwords don't match")
+            raise serializers.ValidationError("Passwords don't match")
         return attrs
 
     def save(self):
@@ -39,7 +39,7 @@ class LoginSerializer(TokenObtainPairSerializer):
     def validate_email(self, email):
         if not User.objects.filter(
                 email=email).exists():  # проверили имейл на соответствие базе данных перед сохранением
-            raise serializers.ValidationError("email doesn't exists")
+            raise serializers.ValidationError("Email doesn't exists")
         return email
 
     def validate(self, attrs):

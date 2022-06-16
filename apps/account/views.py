@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import generics
+from drf_yasg.utils import swagger_auto_schema
 
 from .serializers import RegistrationSerializer, LoginSerializer
 
@@ -12,6 +12,7 @@ User = get_user_model()
 
 
 class RegistrationView(APIView):
+    @swagger_auto_schema(request_body=RegistrationSerializer)
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -26,7 +27,7 @@ class ActivationView(APIView):
         user.is_active = True
         user.activation_code = ''
         user.save()
-        return Response('your account is sucessfully activated!', status=status.HTTP_200_OK)
+        return Response('Your account is sucessfully activated!', status=status.HTTP_200_OK)
 
 
 class LoginView(TokenObtainPairView):

@@ -3,7 +3,6 @@ from .models import Product, Review, LikeProduct, SimilarProduct
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    author = serializers.HiddenField(default=serializers.CurrentUserDefault())
     created_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M:%S', read_only=True)
 
     class Meta:
@@ -12,8 +11,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['category'] = instance.category.type
-        representation['author'] = instance.author.email
         representation['image'] = instance.image_url
         representation['reviews'] = ReviewProductSerializer(instance.reviews.all(),
                                                   many=True, context=self.context).data

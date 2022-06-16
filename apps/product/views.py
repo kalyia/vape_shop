@@ -1,4 +1,3 @@
-from django.views.generic import ListView
 from rest_framework import generics
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
@@ -18,8 +17,8 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = (filters.DjangoFilterBackend, OrderingFilter, SearchFilter)
-    ordering_fields = ['create_date', 'title', 'price']
-    permission_classes = [IsAuthenticated, ]
+    ordering_fields = ['category', 'title', 'price']
+    permission_classes = [IsAuthenticatedOrReadOnly ]
     pagination_class = ProductPagination
     search_fields = ['title', 'description']
 
@@ -59,11 +58,11 @@ class ProductViewSet(ModelViewSet):
         if fav.favorite == False:
             fav.favorite = not fav.favorite
             fav.save()
-            return Response('Added to Favs')
+            return Response('Added to Favorites')
         else:
             fav.favorite = not fav.favorite
             fav.save()
-            return Response('Not in Favs')
+            return Response('Not in Favorites')
 
 class ReviewProductView(ModelViewSet):
     queryset = Review.objects.all()

@@ -1,14 +1,19 @@
+from unicodedata import category
 from django.conf import settings
 from django.db import models
-from django.contrib.auth import get_user_model
-
-from apps.category.models import Category
 
 
 class Product(models.Model):
-    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    TYPES = (
+        ("vape", "Vapes"),
+        ("pod", "Pods"),
+        ("cigarettes", "Cigarettes"),
+        ("hookah", "Hookah"),
+        ("self-rolling", "Hand Rolling Tobacco"),
+        ("goo", "E-liquid "),
+    )
     title = models.CharField(max_length=100)
+    category= models.CharField(choices=TYPES, max_length=100)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
@@ -33,7 +38,7 @@ class Review(models.Model):
     class Meta:
         ordering = ('-created_at', )
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.author.email}"
 
 
