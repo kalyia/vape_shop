@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'corsheaders',
+    'whitenoise',
     'whitenoise.runserver_nostatic',
 
     #apps
