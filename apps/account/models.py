@@ -73,7 +73,7 @@ class CustomUser(AbstractBaseUser):
     def send_activation_email(self):
         activation_url = f'http://localhost:8000/account/activate/{self.activation_code}'
         message = f'You are signed up sucessfuly! Activate your account {activation_url}'
-        send_mail("activate your account", message, 'test@gmail.com', [self.email, ])
+        send_mail("activate your account", message, 'test@gmail.com', [self.email, ], fail_silently=False)
 
 
 post_save.connect(post_create_cart_signal, CustomUser)
