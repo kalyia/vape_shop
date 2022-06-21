@@ -10,7 +10,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         cart_shopping = self.context.get("request").user.cart
-        attrs['cart_shopping'] = cart_shopping
+        attrs['cart'] = cart_shopping
         return attrs
 
     def to_representation(self, instance):
@@ -23,11 +23,11 @@ class CartItemSerializer(serializers.ModelSerializer):
         except Exception as ex:
             return rep
 
-    def create(self, validated_data):
-        cart = self.context.get("request").user.cart
-        product = validated_data.get('product')
-        quantity = validated_data.get('quantity')
-        return CartItem.objects.create(product=product, cart=cart, quantity=quantity)
+    # def create(self, validated_data):
+    #     cart = self.context.get("request").user.cart
+    #     product = validated_data.get('product')
+    #     quantity = validated_data.get('quantity')
+    #     return CartItem.objects.create(product=product, cart=cart, quantity=quantity)
 
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
