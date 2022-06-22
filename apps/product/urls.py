@@ -9,5 +9,5 @@ router.register('', ProductViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('like/', LikeProductView.as_view()),
+    path('like/', LikeProductView.as_view({'get': 'like'})),
 ]
