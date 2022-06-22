@@ -22,11 +22,11 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    # @property
-    # def image_url(self):
-    #     if self.image and hasattr(self.image, 'url'):
-    #         return self.image.url
-    #     return ''
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ''
 
 
 class Review(models.Model):
