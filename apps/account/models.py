@@ -76,4 +76,4 @@ class CustomUser(AbstractBaseUser):
         send_mail("activate your account", message, 'test@gmail.com', [self.email, ], fail_silently=False)
 
 
-post_save.connect(post_create_cart_signal, CustomUser)
+post_save.connect(post_create_cart_signal, CustomUser) #автоматическое создание корзины

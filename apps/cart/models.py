@@ -4,20 +4,20 @@ from django.conf import settings
 from apps.product.models import Product
 
 
-class ShoppingCart(models.Model):
+class ShoppingCart(models.Model): # пустая корзина
 
     user = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='cart')
 
     def get_total_price_sum(self):
         cart_items = self.cart_items.all()
-        total = sum([item.get_total_price_item() for item in cart_items])
+        total = sum([item.get_total_price_item() for item in cart_items]) # типа reduce функции
         return total
 
     def __str__(self):
         return self.user.username
 
 
-class CartItem(models.Model):
+class CartItem(models.Model): # корзина с товарами
 
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, related_name='cart_products')
     cart = models.ForeignKey(to=ShoppingCart, on_delete=models.CASCADE, related_name='cart_items')
