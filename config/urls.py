@@ -14,7 +14,7 @@ from apps.cart.views import ShoppingCartViewSet, CartItemViewSet
 
 router = DefaultRouter()
 router.register('order', OrderViewSet, basename='order')
-router.register('user_cart', ShoppingCartViewSet, basename='shopping_cart')
+router.register('user_cart', ShoppingCartViewSet, basename='user_cart')
 router.register('cart_item', CartItemViewSet, basename='cart_item')
 
 schema_view = get_schema_view(

@@ -155,6 +155,7 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
+
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)

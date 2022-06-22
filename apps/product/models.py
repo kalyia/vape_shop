@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Product(models.Model):
+
     TYPES = (
         ("vape", "Vapes"),
         ("pod", "Pods"),
@@ -11,6 +12,7 @@ class Product(models.Model):
         ("self-rolling", "Hand Rolling Tobacco"),
         ("goo", "E-liquid "),
     )
+    
     title = models.CharField(max_length=100)
     category= models.CharField(choices=TYPES, max_length=100)
     description = models.TextField()
@@ -45,11 +47,6 @@ class LikeProduct(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='likes')
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, related_name='likes')
     is_like = models.BooleanField(default=False)
-
-
-class SimilarProduct(models.Model):
-    on_product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True, related_name='on_products')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True, related_name='products')
 
 
 class Favorite(models.Model):

@@ -14,6 +14,7 @@ from .serializers import *
 
 
 class ProductViewSet(ModelViewSet):
+    
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = (filters.DjangoFilterBackend, OrderingFilter, SearchFilter)
@@ -31,7 +32,7 @@ class ProductViewSet(ModelViewSet):
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             return [IsAdminUser()]
-        elif self.action in ['toggle_like', ]:
+        elif self.action in ['likes', ]:
             return [IsAuthenticated()]
         return []
 
@@ -65,15 +66,11 @@ class ProductViewSet(ModelViewSet):
             fav.save()
             return Response('Not in Favorites')
 
+
 class ReviewProductView(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, ]
-
-
-class ProductDetailView(generics.ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductDetailSerializer
 
 
 class FavoriteView(ListAPIView):

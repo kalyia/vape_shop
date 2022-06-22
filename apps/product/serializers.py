@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .models import Product, Review, LikeProduct, SimilarProduct
+from .models import Product, Review, LikeProduct
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    
     created_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M:%S', read_only=True)
 
     class Meta:
@@ -20,6 +21,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ReviewProductSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Review
         exclude = ('author', )
@@ -37,6 +39,7 @@ class ReviewProductSerializer(serializers.ModelSerializer):
 
 
 class LikeProductSerializer(serializers.ModelSerializer):
+    
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
@@ -44,30 +47,8 @@ class LikeProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class SimilarProductSerializer(serializers.ModelSerializer):
-    category = serializers.SerializerMethodField()
-    price = serializers.SerializerMethodField()
-
-    class Meta:
-        model = SimilarProduct
-        fields = ['category', 'price']
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['product'] = instance.product.title
-        return representation
-
-
-class ProductDetailSerializer(serializers.ModelSerializer):
-    category = serializers.SerializerMethodField()
-    products = SimilarProductSerializer(many=True)
-
-    class Meta:
-        model = Product
-        fields = '__all__'
-
-
 class FavoriteListSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Product
         fields = '__all__' 
