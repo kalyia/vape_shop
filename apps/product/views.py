@@ -75,7 +75,7 @@ class ReviewProductView(ModelViewSet):
 
 class LikeProductView(ModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = LikeProductSerializer
+    serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, ]
 
 
