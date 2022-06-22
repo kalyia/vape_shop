@@ -10,3 +10,4 @@ python-decouple
 gunicorn
 whitenoise
 dj-database-url
+django-heroku

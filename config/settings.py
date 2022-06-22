@@ -3,6 +3,7 @@ from pathlib import Path
 from decouple import config
 from datetime import timedelta
 import dj_database_url
+import django_heroku
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -168,3 +169,4 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+django_heroku.settings(locals())
