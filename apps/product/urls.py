@@ -6,6 +6,7 @@ from .views import *
 router = SimpleRouter()
 router.register('reviews', ReviewProductView)
 router.register('', ProductViewSet)
+router.register()
 
 urlpatterns = [
     path('', include(router.urls)),
