@@ -12,7 +12,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['image'] = instance.image_url
         representation['reviews'] = ReviewProductSerializer(instance.reviews.all(),
                                                   many=True, context=self.context).data
 
