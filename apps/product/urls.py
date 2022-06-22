@@ -6,8 +6,8 @@ from .views import *
 router = SimpleRouter()
 router.register('reviews', ReviewProductView)
 router.register('', ProductViewSet)
+router.register('', LikeProductView)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('like/', LikeProductView.as_view({'get': 'like'})),
 ]
