@@ -71,7 +71,7 @@ class CustomUser(AbstractBaseUser):
             self.save()
 
     def send_activation_email(self):
-        activation_url = f'http://44.198.54.85//account/activate/{self.activation_code}'
+        activation_url = f'http://44.198.54.85/account/activate/{self.activation_code}'
         message = f'You are signed up sucessfuly! Activate your account {activation_url}'
         send_mail("activate your account", message, 'test@gmail.com', [self.email, ], fail_silently=False)
 
