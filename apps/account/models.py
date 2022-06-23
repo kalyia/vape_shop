@@ -6,9 +6,9 @@ from django.db.models.signals import post_save
 from .services.signals import post_create_cart_signal
 
 
-class CustomUserManager(UserManager):
-    def _create(self, username, email, password, **extra_fields):
-        if not email:
+class CustomUserManager(UserManager): 
+    def _create(self, username, email, password, **extra_fields):       
+        if not email: 
             raise ValueError('Email cannot be empty')
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
@@ -16,12 +16,12 @@ class CustomUserManager(UserManager):
         return user
 
     def create_user(self, username, email, password, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_staff', False)    #дополнительные поля
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_staff', False)
         return self._create(username, email, password, **extra_fields)
 
-    def create_superuser(self, username, email, password, **extra_fields):
+    def create_superuser(self, username, email, password, **extra_fields):  
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields['is_active'] = True
@@ -45,7 +45,7 @@ class CustomUser(AbstractBaseUser):
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ["username", ]
+    REQUIRED_FIELDS = ["username", ]       #поля для входа на сайт
 
     def __str__(self):
         return self.email
